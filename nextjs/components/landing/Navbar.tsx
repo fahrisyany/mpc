@@ -67,7 +67,7 @@ export const Navbar = ({ user }: { user: User | null }) => {
             <a
               rel="noreferrer noopener"
               href="/"
-              className="ml-2 font-bold text-xl flex"
+              className="ml-4 font-bold text-xl flex"
             >
               <LogoIcon />
               Momotaro Premium Collection
