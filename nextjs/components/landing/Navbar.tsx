@@ -32,15 +32,19 @@ interface RouteProps {
 const routeList: RouteProps[] = [
   {
     href: '/#features',
-    label: 'Features'
-  },
-  {
-    href: '/#testimonials',
-    label: 'Testimonials'
+    label: 'Foundations'
   },
   {
     href: '/#pricing',
-    label: 'Pricing'
+    label: 'FAB Singles and Sealed'
+  },
+  {
+    href: '/#pricing',
+    label: 'FAB Premium'
+  },
+  {
+    href: '/#testimonials',
+    label: 'Gaming Supplies'
   },
   {
     href: '/#faq',

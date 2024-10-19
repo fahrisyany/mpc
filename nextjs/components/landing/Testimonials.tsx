@@ -18,45 +18,45 @@ interface TestimonialProps {
 const testimonials: TestimonialProps[] = [
   {
     image: 'https://github.com/shadcn.png',
-    name: 'John Doe React',
-    userName: '@john_Doe',
-    comment: 'This landing page is awesome!'
+    name: 'Putra Ahmad Dhani Pratikto',
+    userName: '@fufufafa',
+    comment: 'MPC paling anjaaaaaay.'
   },
   {
     image: 'https://github.com/shadcn.png',
-    name: 'John Doe React',
-    userName: '@john_Doe1',
+    name: 'Adiguna Sodikhin',
+    userName: '@visionary_ID',
     comment:
-      'Lorem ipsum dolor sit amet,empor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.'
+      'Semoga MPC terus berkembang kedepannya amiin.'
   },
 
   {
     image: 'https://github.com/shadcn.png',
-    name: 'John Doe React',
-    userName: '@john_Doe2',
+    name: 'Adzuf Surya',
+    userName: '@newbie_shop',
     comment:
-      'Lorem ipsum dolor sit amet,exercitation. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.'
+      'MPC selalu memberikan yang terbaik dimanapun dan kapan pun.'
   },
   {
     image: 'https://github.com/shadcn.png',
-    name: 'John Doe React',
-    userName: '@john_Doe3',
+    name: 'Kipli',
+    userName: '@thekips',
     comment:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
+      'MPC the best emang.'
   },
   {
     image: 'https://github.com/shadcn.png',
-    name: 'John Doe React',
-    userName: '@john_Doe4',
+    name: 'Frederick Batara',
+    userName: '@zephyr',
     comment:
-      'Lorem ipsum dolor sit amet, tempor incididunt  aliqua. Ut enim ad minim veniam, quis nostrud.'
+      'Anzuuuy.'
   },
   {
     image: 'https://github.com/shadcn.png',
-    name: 'John Doe React',
-    userName: '@john_Doe5',
+    name: 'Zsuryanuti Perdana',
+    userName: '@zpk',
     comment:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+      'Customer service fast respond dan pengiriman lumayan cepat, Mantaap.'
   }
 ];
 
@@ -64,12 +64,10 @@ export const Testimonials = () => {
   return (
     <section id="testimonials" className="container py-24 sm:py-32">
       <h2 className="text-3xl md:text-4xl font-bold">
-        Discover Why
+        Customer{' '}
         <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
-          {' '}
-          People Love{' '}
+          Reviews
         </span>
-        This Landing Page
       </h2>
 
       <p className="text-xl text-muted-foreground pt-4 pb-8">

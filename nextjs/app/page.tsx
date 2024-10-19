@@ -26,15 +26,15 @@ export default async function PricingPage() {
     <>
       <Navbar user={user} />
       <Hero />
-      {/* <Sponsors /> */}
+      <Sponsors />
       <About />
-      <HowItWorks />
-      <Features />
+      {/* <HowItWorks /> */}
+      {/* <Features /> */}
       <Services />
-      <Cta />
+      {/* <Cta /> */}
       <Testimonials />
-      <Team />
-      <Pricing user={user} />
+      {/* <Team /> */}
+      {/* <Pricing user={user} /> */}
       <Newsletter />
       <FAQ />
       <Footer />
