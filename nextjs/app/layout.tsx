@@ -12,7 +12,7 @@ const PostHogPageView = dynamic(() => import('./PostHogPageView'), {
 });
 
 const meta = {
-  title: 'Next.js Subscription Starter',
+  title: 'Momotaro Premium Collection',
   description: 'Brought to you by Vercel, Stripe, and Supabase.',
   cardImage: '/og.png',
   robots: 'follow, index',
