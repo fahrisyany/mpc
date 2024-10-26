@@ -17,7 +17,6 @@ import {
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Menu } from 'lucide-react';
 import { ModeToggle } from './mode-toggle';
-import { LogoIcon } from './Icons';
 import { User } from '@supabase/supabase-js';
 import { createApiClient } from '@/utils/supabase/api';
 import { createClient } from '@/utils/supabase/client';
@@ -53,6 +52,7 @@ const routeList: RouteProps[] = [
 ];
 
 export const Navbar = ({ user }: { user: User | null }) => {
+  console.log("🚀 ~ Navbar ~ user:", user)
   const router = useRouter();
   const { toast } = useToast();
   const api = createApiClient(createClient());
@@ -73,7 +73,6 @@ export const Navbar = ({ user }: { user: User | null }) => {
               href="/"
               className="ml-4 font-bold text-xl flex"
             >
-              <LogoIcon />
               Momotaro Premium Collection
             </a>
           </NavigationMenuItem>

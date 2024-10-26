@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic';
 import { Toaster } from '@/components/ui/toaster';
 
 const PostHogPageView = dynamic(() => import('./PostHogPageView'), {
-  ssr: false
+  ssr: true
 });
 
 const meta = {
