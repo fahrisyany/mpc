@@ -46,6 +46,11 @@ export const createApiClient = (supabase: SupabaseClient<Database>) => {
     if (res.error) throw res.error;
     return res;
   };
+  // const addToCart = async (payload: SignInWithPasswordCredentials) => {
+  //   const res = await supabase.auth.signInWithPassword(creds);
+  //   if (res.error) throw res.error;
+  //   return res.data;
+  // };
 
   return {
     passwordSignin,
@@ -54,5 +59,6 @@ export const createApiClient = (supabase: SupabaseClient<Database>) => {
     passwordUpdate,
     oauthSignin,
     signOut
+    // addToCart
   };
 };

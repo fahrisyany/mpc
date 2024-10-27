@@ -13,7 +13,7 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet';
-
+import { Separator } from "@/components/ui/separator"
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Menu } from 'lucide-react';
 import { ModeToggle } from './mode-toggle';
@@ -22,6 +22,7 @@ import { createApiClient } from '@/utils/supabase/api';
 import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
+import { CartSlide } from "@/components/misc/CartSlide"
 
 interface RouteProps {
   href: string;
@@ -48,6 +49,10 @@ const routeList: RouteProps[] = [
   {
     href: '/#faq',
     label: 'FAQ'
+  },
+  {
+    href: '/#cart',
+    label: 'Cart'
   }
 ];
 
@@ -73,14 +78,14 @@ export const Navbar = ({ user }: { user: User | null }) => {
               href="/"
               className="ml-4 font-bold text-xl flex"
             >
-              Momotaro Premium Collection
+              MPC
             </a>
           </NavigationMenuItem>
 
           {/* mobile */}
           <span className="flex md:hidden">
             <ModeToggle />
-
+            <CartSlide />
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger className="px-2" asChild>
                 <Button variant="ghost" size="icon">
@@ -134,7 +139,9 @@ export const Navbar = ({ user }: { user: User | null }) => {
             ))}
           </nav>
 
-          <div className="hidden md:flex gap-2">
+          <div className="hidden md:flex gap-2 h-5 items-center space-x-4 text-sm">
+            <ModeToggle />
+            <CartSlide />
             <Button
               onClick={handleAuth}
               className={`border`}
@@ -142,7 +149,7 @@ export const Navbar = ({ user }: { user: User | null }) => {
             >
               {user ? 'Account' : 'Sign In'}
             </Button>
-            <ModeToggle />
+
           </div>
         </NavigationMenuList>
       </NavigationMenu>
