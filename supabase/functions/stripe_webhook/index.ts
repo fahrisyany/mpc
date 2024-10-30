@@ -9,7 +9,7 @@ Deno.serve(async (req) => {
   let receivedEvent;
   try {
     receivedEvent = await processWebhookRequest(req);
-  } catch (e) {
+  } catch (e: any) {
     return new Response(e.message, { status: 400 });
   }
 
@@ -32,10 +32,7 @@ Deno.serve(async (req) => {
   return new Response(JSON.stringify({ ok: true }), { status: 200 });
 });
 
-async function onSubscriptionUpdated(
-  subscription: Stripe.Subscription,
-  deleted = false,
-) {
+async function onSubscriptionUpdated(subscription: Stripe.Subscription, deleted = false) {
   const prods = await getActiveProducts(subscription.customer);
   const subscriptionItems = subscription.items.data;
   const validStatuses = ["incomplete", "trialing", "active"];
@@ -51,16 +48,17 @@ async function onSubscriptionUpdated(
     }
   }
   // updates purchased_products
-  await supabase.from("stripe").update({
-    active_products: prods,
-  }).eq("stripe_customer_id", subscription.customer);
+  await supabase
+    .from("stripe")
+    .update({
+      active_products: prods,
+    })
+    .eq("stripe_customer_id", subscription.customer);
 }
 
 async function onCheckoutComplete(session: Stripe.Session) {
   const prods = await getActiveProducts(session.customer);
-  const { data: lineItems } = await stripe.checkout.sessions.listLineItems(
-    session.id,
-  );
+  const { data: lineItems } = await stripe.checkout.sessions.listLineItems(session.id);
 
   for (const item of lineItems) {
     const prod = item.price.product;
@@ -68,14 +66,17 @@ async function onCheckoutComplete(session: Stripe.Session) {
     if (item.mode === "subscription" || prods.includes(prod)) continue;
     prods.push(prod);
   }
-  const { data: row } = await supabase.from("stripe").update({
-    active_products: prods,
-  }).eq("stripe_customer_id", session.customer).select().maybeSingle();
+  const { data: row } = await supabase
+    .from("stripe")
+    .update({
+      active_products: prods,
+    })
+    .eq("stripe_customer_id", session.customer)
+    .select()
+    .maybeSingle();
 
   // Sends email based on purchase
-  const checkoutProducts = lineItems.map((i: Stripe.LineItem) =>
-    i.price.product
-  );
+  const checkoutProducts = lineItems.map((i: Stripe.LineItem) => i.price.product);
   await sendPurchaseEmail(checkoutProducts, session.customer_details.email);
 
   // posthog capture
@@ -86,19 +87,14 @@ async function onCheckoutComplete(session: Stripe.Session) {
     properties: {
       prods,
       $set: {
-        "stripe_customer_id": row.stripe_customer_id,
+        stripe_customer_id: row.stripe_customer_id,
       },
     },
   });
 }
 
 async function getActiveProducts(customer: string): Promise<string[]> {
-  const { data } = await supabase.from("stripe").select(
-    "active_products",
-  ).eq(
-    "stripe_customer_id",
-    customer,
-  ).single();
+  const { data } = await supabase.from("stripe").select("active_products").eq("stripe_customer_id", customer).single();
   const purchasedProds: string[] = data?.active_products || [];
   return purchasedProds;
 }
