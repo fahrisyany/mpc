@@ -12,8 +12,7 @@ async function getUserFromRequest(req: Request) {
 // handles cors and returns the user if function called from client
 export const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
 function corsResponse(res: Response): Response {
@@ -34,18 +33,13 @@ function corsResponse(res: Response): Response {
 }
 
 export function resFromError(e: { message?: string }): Response {
-  return new Response(
-    JSON.stringify({ message: e?.message }),
-    {
-      status: 400,
-      headers: { "Content-Type": "application/json", ...corsHeaders },
-    },
-  );
+  return new Response(JSON.stringify({ message: e?.message }), {
+    status: 400,
+    headers: { "Content-Type": "application/json", ...corsHeaders },
+  });
 }
 
-export function clientRequestHandlerWithUser(
-  handler: (req: Request, user: User) => Promise<Response> | Response,
-) {
+export function clientRequestHandlerWithUser(handler: (req: Request, user: User) => Promise<Response> | Response) {
   const enhancedHandler = async (req: Request) => {
     // Handle CORS preflight requests
     if (req.method === "OPTIONS") {
@@ -56,7 +50,8 @@ export function clientRequestHandlerWithUser(
       const user = await getUserFromRequest(req);
       if (!user) throw Error("Authentication Error");
       return corsResponse(await handler(req, user));
-    } catch (e) {
+      // deno-lint-ignore no-explicit-any
+    } catch (e: any) {
       console.error(e);
       return resFromError(e);
     }
@@ -64,9 +59,7 @@ export function clientRequestHandlerWithUser(
   Deno.serve(enhancedHandler);
 }
 
-export function clientRequestHandler(
-  handler: (req: Request) => Promise<Response> | Response,
-) {
+export function clientRequestHandler(handler: (req: Request) => Promise<Response> | Response) {
   const enhancedHandler = async (req: Request) => {
     // Handle CORS preflight requests
     if (req.method === "OPTIONS") {
@@ -76,7 +69,7 @@ export function clientRequestHandler(
     try {
       const res = await handler(req);
       return corsResponse(res);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
       return resFromError(e);
     }

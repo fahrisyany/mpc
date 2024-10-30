@@ -10,10 +10,11 @@ export default async function SignIn({
   params: { id: string };
   searchParams: { disable_button: boolean };
 }) {
-  if (!Object.values(AuthState).includes(params.id as AuthState)) {
+  const { id } = await params
+  if (!Object.values(AuthState).includes(id as AuthState)) {
     redirect('/auth');
   }
-  const currState = params.id as AuthState;
+  const currState = id as AuthState;
 
   // Check if the user is already logged in and redirect to the account page if so
   const supabase = createClient();
